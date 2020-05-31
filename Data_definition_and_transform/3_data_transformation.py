@@ -25,15 +25,19 @@ function description(π¶ƒ‹√Ë ˆ):
 import torch
 import numpy as np
 
-x = torch.randn(1)
+x = torch.randn(1, requires_grad=True)
 print(x)
 print(x.item())
-print(x.numpy())
+print(x.detach().numpy())
 
 y = np.ones((3, 5))
-z = torch.from_numpy(y)
+z = torch.mul(x, x)
 np.add(y, 1, out=y)
 print(z)
+
+print(x.requires_grad)
+# print(y.requires_grad)
+print(z.requires_grad)
 
 if torch.cuda.is_available():
     device = torch.device("cuda")
