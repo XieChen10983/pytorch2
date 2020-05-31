@@ -10,6 +10,9 @@ function description(功能描述):
             z = x + y 或 z = torch.add(x, y)
             y.add_(x)  # inplace型加法
 
+        矩阵乘法(mm)：
+            x.mm(y)
+
         像numpy一样的切片操作：
             x = y[:, 1]
 
@@ -21,7 +24,16 @@ import torch
 x = torch.empty(3, 5)
 print(x)
 y = torch.ones_like(x)
+# 自加法
 y.add_(x)
 print(y)
+
+# 矩阵乘法
+x1 = torch.randint(1, 4, (3, 5))
+x2 = torch.randint(1, 4, (5, 3))
+output = x1.mm(x2)
+print(output.size())
+
+# 转置
 z = torch.t(y)
 print(z)
