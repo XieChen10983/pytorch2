@@ -14,7 +14,7 @@ function description(功能描述):
         z = np.ones(3, 5)
         x = torch.from_numpy(z)
         此时数据之间也是联动的，即若numpy数据z发生变化，tensor数据x也随之变化
-    将数据转换为cuda数据：
+    将数据转换为cuda数据(GPU计算时，数据和网络都需要转为GPU类型，即data.to(device), net.to(device))：
         判断是否有cuda：
             torch.cuda.is_available()
         cpu数据转为cuda数据：
