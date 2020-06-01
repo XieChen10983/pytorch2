@@ -6,3 +6,8 @@ filename(文件名): test.py
 function description(功能描述):
 ...
 """
+import torch
+
+a = torch.randn(5, 6)
+b = torch.randn(6, 7)
+print(a.mm(b))
