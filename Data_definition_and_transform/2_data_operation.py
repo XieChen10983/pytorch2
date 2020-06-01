@@ -10,8 +10,8 @@ function description(功能描述):
             z = x + y 或 z = torch.add(x, y)
             y.add_(x)  # inplace型加法
 
-        矩阵乘法(mm)：
-            x.mm(y)
+        矩阵乘法(mm) 或 @：
+            x.mm(y) 或 x @ y
 
         像numpy一样的切片操作：
             x = y[:, 1]
@@ -33,6 +33,8 @@ x1 = torch.randint(1, 4, (3, 5))
 x2 = torch.randint(1, 4, (5, 3))
 output = x1.mm(x2)
 print(output.size())
+output2 = x1 @ x2
+print(output2.size())
 
 # 转置
 z = torch.t(y)
