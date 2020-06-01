@@ -78,4 +78,5 @@ for t in range(20000):
 
     with torch.no_grad():
         for param in net.parameters():
-            param -= learning_rate * param.grad
+            param.sub_(learning_rate * param.grad)
+            # param -= learning_rate * param.grad
