@@ -20,6 +20,7 @@ function description(π¶ƒ‹√Ë ˆ):
         optimizer.step()
 """
 import torch
+from time import time
 
 # N is batch size; D_in is input dimension;
 # H is hidden dimension; D_out is output dimension.
@@ -41,28 +42,33 @@ loss_fn = torch.nn.MSELoss(reduction='sum')
 # the model for us. Here we will use Adam; the optim package contains many other
 # optimization algorithms. The first argument to the Adam constructor tells the
 # optimizer which Tensors it should update.
-learning_rate = 1e-4
+learning_rate = 1e-6
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
-for t in range(500):
-    # Forward pass: compute predicted y by passing x to the model.
-    y_pred = model(x)
 
-    # Compute and print loss.
-    loss = loss_fn(y_pred, y)
-    if t % 100 == 99:
-        print(t, loss.item())
+start = time()
+for _ in range(100):
+    for t in range(500):
+        # Forward pass: compute predicted y by passing x to the model.
+        y_pred = model(x)
 
-    # Before the backward pass, use the optimizer object to zero all of the
-    # gradients for the variables it will update (which are the learnable
-    # weights of the model). This is because by default, gradients are
-    # accumulated in buffers( i.e, not overwritten) whenever .backward()
-    # is called. Checkout docs of torch.autograd.backward for more details.
-    optimizer.zero_grad()
+        # Compute and print loss.
+        loss = loss_fn(y_pred, y)
+        if t % 100 == 99:
+            print(t, loss.item())
 
-    # Backward pass: compute gradient of the loss with respect to model
-    # parameters
-    loss.backward()
+        # Before the backward pass, use the optimizer object to zero all of the
+        # gradients for the variables it will update (which are the learnable
+        # weights of the model). This is because by default, gradients are
+        # accumulated in buffers( i.e, not overwritten) whenever .backward()
+        # is called. Checkout docs of torch.autograd.backward for more details.
+        optimizer.zero_grad()
 
-    # Calling the step function on an Optimizer makes an update to its
-    # parameters
-    optimizer.step()
+        # Backward pass: compute gradient of the loss with respect to model
+        # parameters
+        loss.backward()
+
+        # Calling the step function on an Optimizer makes an update to its
+        # parameters
+        optimizer.step()
+end = time()
+print("running time: ", end - start)
