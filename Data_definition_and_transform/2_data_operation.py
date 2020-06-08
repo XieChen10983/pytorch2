@@ -10,8 +10,11 @@ function description(功能描述):
             z = x + y 或 z = torch.add(x, y)
             y.add_(x)  # inplace型加法
 
-        矩阵乘法(mm) 或 @：
+        二维矩阵乘法(mm) 或 @：
             x.mm(y) 或 x @ y
+        三维矩阵乘法(第一维是batchsize)：torch.bmm(x, y)
+        混合矩阵乘法(较为复杂，具体查看pytorch教程)：torch.matmul(x, y)
+        逐点乘法：torch.mul(x, y)
 
         像numpy一样的切片操作：
             x = y[:, 1]
